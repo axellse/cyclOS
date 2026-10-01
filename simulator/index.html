@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cyclOS</title>
+</head>
+<style>
+    #simulator-interface {
+        min-height: 200px;
+        min-width: 200px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+
+<body>
+    <h1>cyclOS simulator</h1>
+    <p>this is a WASM based simulator for cyclOS.</p>
+    <h2>Usage</h2>
+    <p>Usage is very simple. compile cyclOS like usual, using <code>wasm</code> as the compilation target and
+        <code>simulator</code> for the drivers. For example</p>
+    <blockquote><code>tinygo build -o simulator.wasm -target=wasm</code></blockquote>
+    <p>Do note that on windows, you need to install binaryen with:</p>
+    <blockquote><code>scoop install binaryen</code></blockquote>
+    <p>Then, upload your compiled binary into the <b>WASM binary</b> field in the setup section.</p>
+    <p>Finally, customize your simulated hardware to your liking before pressing Run.</p>
+    <h2>Setup</h2>
+
+    <form id="setup">
+        <label for="wasm-binary">WASM binary:</label>
+        <input required type="file" name="wasm-binary" id="wasm-binary">
+        <br>
+        <label for="display-width">Display width:</label>
+        <input required min="10" value="320" type="number" name="display-width" id="display-width">
+        <br>
+        <label for="display-height">Display height:</label>
+        <input required min="10" value="170" type="number" name="display-height" id="display-height">
+        <br>
+        <button>Run!</button>
+    </form>
+
+    <h2>Simulator</h2>
+    <div id="simulator-interface">
+        <span>Configure the simulator in the setup section above, then press Run!</span>
+    </div>
+
+    <script src="./wasm_exec.js"></script>
+    <script src="./index.js"></script>
+
+    </script>
+</body>
+
+</html>

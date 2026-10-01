@@ -1,0 +1,8 @@
+{
+    "go.toolsEnvVars": {
+        "GOOS": "linux",
+        "GOARCH": "arm",
+        "GOROOT": "C:\\Users\\ms\\AppData\\Local\\tinygo\\goroot-ffcc0b5ecd6e3d6d325a0ba75fd4638b141712a8979a400a7de372dcb2ee9517",
+        "GOFLAGS": "-tags=d_tdisplays3,xtensa,baremetal,linux,arm,esp32s3,esp,esp32s3_generic,tinygo,purego,osusergo,math_big_pure_go,gc.conservative,scheduler.tasks,serial.usb,tinygo.unicore"
+    }
+}
