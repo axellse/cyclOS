@@ -1,4 +1,4 @@
-//gog:build i_simulator
+//go:build i_simulator
 
 package input
 
