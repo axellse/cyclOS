@@ -17,5 +17,3 @@ var SecondaryBackgroundColor = color.RGBA{7, 7, 8, 255}
 
 var PrimaryTextColor = color.RGBA{255, 255, 255, 255}
 var SecondaryTextColor = color.RGBA{137, 137, 137, 255}
-
-var Pages = []string{"home", "stat", "nav", "trends", "settings"}

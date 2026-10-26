@@ -25,6 +25,7 @@ const (
 )
 
 type UIPage string
+var UIPages = []UIPage{Home, Stat, Nav, Trends, Settings}
 
 //InputState provides state controlled by user input.
 type InputState struct {

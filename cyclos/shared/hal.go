@@ -1,9 +1,9 @@
 package shared
 
 import "image/color"
-
 type HAL struct {
 	Display Display
+	Input Input
 }
 
 //The Display interface is a flexible interface for display drivers. It allows UI built on top to adapt to different displays and their capabilities (size and color depth).
@@ -18,9 +18,8 @@ type Display interface {
 	SetPixel(x, y int16, c color.RGBA)
 }
 
-/*
-//The HID interface is a flexible interface for human interface devices. It defines a series of relatively specific event types allowing UI built on top to adapt to different interface devices.
-type HID interface {
-	//ReadEvent reads for any new input event. it returns a 
-	ReadEvent() (width, height int16)
-}*/
+//The Input interface is a flexible interface for human interface devices and gives the input driver full control over the Input system state object. Most drivers will fully or partially use a libinput input scheme.
+type Input interface {
+	//Channel returns a channel that new input state mutations will be pushed to. The input driver will call LatestState whenever an input event has occured, mutate the return value, and push into onto the channel. Channel will/can only be called once.
+	Channel(LatestState func() InputState) chan InputState
+}

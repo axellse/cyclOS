@@ -6,6 +6,7 @@ import (
 
 	"github.com/axellse/cyclos/cyclos/config"
 	"github.com/axellse/cyclos/cyclos/drivers/display"
+	"github.com/axellse/cyclos/cyclos/drivers/input"
 	"github.com/axellse/cyclos/cyclos/shared"
 	"github.com/axellse/cyclos/cyclos/ui"
 )
@@ -18,10 +19,25 @@ type System struct {
 	state shared.SystemState
 }
 
-func UIRenderer(system *System) {
+func UISubsystem(system *System) {
 	for {
 		state := <- system.UIListener
 		ui.BuildUI(state, system.HAL.Display)
+	}
+}
+
+func InputSubsystem(system *System) {
+	inChannel := system.HAL.Input.Channel(func() shared.InputState {
+		return system.state.Input
+	})
+
+	for {
+		newInput := <- inChannel
+		fmt.Println("new input", newInput)
+
+		newState := system.state
+		newState.Input = newInput
+		system.PushState <- newState
 	}
 }
 
@@ -30,13 +46,16 @@ func main() {
 	system.Config = config.LoadConfig()
 	system.HAL = &shared.HAL{
 		Display: display.Init(system.Config.Display),
+		Input: input.Init(),
 	}
 
 	system.PushState = make(chan shared.SystemState)
 	system.UIListener = make(chan shared.SystemState)
 
-	go UIRenderer(system)
-	go func() {
+	go UISubsystem(system)
+	go InputSubsystem(system)
+
+	go func() { //example
 		hour, min, _ := time.Now().Clock()
 		clockStr := fmt.Sprintf("%02d", hour) + ":" + fmt.Sprintf("%02d", min)
 
@@ -61,7 +80,16 @@ func main() {
 				SpeedUnit: shared.KmH,
 			},
 		}
+
+		for {
+			time.Sleep(1 * time.Second) //once the previous pushstate has been handled by sysman, this sleep prevents the scheduler from switching back to this goroutine and allows the ui to update. 
+			newState := system.state
+			fmt.Println(newState)
+			newState.RTMetrics.Speed+= 1
+			system.PushState <- newState //scheduler switches goroutine here
+		}
 	}()
+
 	for {
 		newState := <- system.PushState
 		system.state = newState

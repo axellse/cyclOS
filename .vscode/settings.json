@@ -1,8 +1,8 @@
 {
     "go.toolsEnvVars": {
-        "GOOS": "linux",
-        "GOARCH": "arm",
+        "GOOS": "js",
+        "GOARCH": "wasm",
         "GOROOT": "C:\\Users\\ms\\AppData\\Local\\tinygo\\goroot-ae15ed978e1b577f32538c2968f3314b1b97e72494bb346819640d23b8407507",
-        "GOFLAGS": "-tags=xtensa,baremetal,linux,arm,esp32s3,esp,espradio,esp32s3_generic,tinygo,purego,osusergo,math_big_pure_go,gc.conservative,scheduler.tasks,tinygo.unwind.setjmp,serial.usb,tinygo.unicore"
+        "GOFLAGS": "-tags=i_simulator,tinygo.wasm,tinygo,purego,osusergo,math_big_pure_go,gc.precise,scheduler.asyncify,tinygo.unwind.asyncify,serial.none,tinygo.unicore"
     }
 }

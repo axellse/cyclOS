@@ -1,7 +1,7 @@
 package ui
 
 import (
-	
+
 	"github.com/axellse/cyclos/cyclos/lib/libui"
 	"github.com/axellse/cyclos/cyclos/shared"
 	lexenddeca "github.com/axellse/cyclos/cyclos/ui/fonts/lexend-deca"
@@ -36,14 +36,14 @@ func BuildBase(state shared.SystemState, display shared.Display) {
 		libui.DrawIcon(display, libui.Point{X: BasicMargin, Y: BasicMargin}, icons.Icons["batteryBase"], SecondaryTextColor)
 	}
 
-	totalHeight := BasicMargin * int16(len(Pages) -1) 
-	for _, icon := range Pages {
-		totalHeight += icons.Icons[icon].Height
+	totalHeight := BasicMargin * int16(len(shared.UIPages) -1) 
+	for _, icon := range shared.UIPages {
+		totalHeight += icons.Icons[string(icon)].Height
 	}
 
 	workingY := (state.Misc.DisplayHeight/2) - (totalHeight/2)
-	for _, icon := range Pages {
-		iconObj := icons.Icons[icon]
+	for _, icon := range shared.UIPages {
+		iconObj := icons.Icons[string(icon)]
 		col := IconColor
 		if state.Input.UIPage == shared.UIPage(icon) {
 			col = AccentColor

@@ -11,9 +11,17 @@
         min-height: 200px;
         min-width: 200px;
         display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .vertical-button-panel {
+        display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        width: min-content;
     }
 </style>
 
@@ -22,8 +30,8 @@
     <p>this is a WASM based simulator for cyclOS.</p>
     <h2>Usage</h2>
     <p>Usage is very simple. compile cyclOS like usual, using <code>wasm</code> as the compilation target and
-        <code>simulator</code> for the drivers. For example</p>
-    <blockquote><code>tinygo build -o simulator.wasm -target=wasm</code></blockquote>
+        <code>simulator</code> for the drivers:</p>
+    <blockquote><code>tinygo build -o simulator.wasm -target=wasm -tags=d_tdisplays3 i_simulator</code></blockquote>
     <p>Do note that on windows, you need to install binaryen with:</p>
     <blockquote><code>scoop install binaryen</code></blockquote>
     <p>Then, upload your compiled binary into the <b>WASM binary</b> field in the setup section.</p>
@@ -39,6 +47,11 @@
         <br>
         <label for="display-height">Display height:</label>
         <input required min="10" value="170" type="number" name="display-height" id="display-height">
+        <br>
+        <label for="input-scheme">libinput Input Scheme:</label>
+        <select name="input-scheme" id="input-scheme">
+            <option value="3button">Three button (Up, Down, Confirm)</option>
+        </select>
         <br>
         <button>Run!</button>
     </form>
