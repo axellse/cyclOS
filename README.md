@@ -6,4 +6,4 @@ cyclOS is written in Go (tinygo) and can target a wide variety of different plat
 I've documented my design decisions and progress in great detail in my terra devlogs which you can read for more insight into the project.
 
 ## For terra reviewers
-[The demo documen](https://cd.axell.me/p/cyclos-demo/)t goes through everything needed to try cyclOS. The demo document also links to the simulator which has instructions for how to compile cyclOS for the simulator.
+[The demo document](https://cd.axell.me/p/cyclos-demo/) goes through everything needed to try cyclOS. The demo document also links to the simulator which has instructions for how to compile cyclOS for the simulator.
